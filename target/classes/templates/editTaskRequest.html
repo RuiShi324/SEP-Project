@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SEP system</title>
+
+    <link rel="stylesheet" href="../css/preset.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+
+
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div id="headercontent">
+        <div id="logout">
+          <a id="logoutbutton" href="/logout">Logout</a>
+        </div>
+        <div id = "header">
+           <p th:text="${session.userName}"></p>
+          <p th:text="${session.role}"></p>
+        </div>
+      </div>
+      </header>
+<script>
+
+
+
+</script>
+
+<style>
+
+    .disabled{
+      color: rgb(84, 84, 84);
+      cursor: default;
+      background-color: rgb(235, 235, 228);
+      pointer-events:none;
+    }
+
+    .hidden{
+      display: none;
+    }
+
+ </style>
+
+<div class="content">
+    <div class="sidebar">
+        <ul class="side-menu">
+
+            <li class="hidden" th:class="${session.event}"><a href="/eventManagement">EventManagement</a></li>
+
+            <li class="hidden" th:class="${session.task}"><a href="/taskManagement">TaskManagement</a></li>
+
+            <li class="hidden" th:class="${session.staff}"><a href="/employeeManagement">EmployeeManagement</a></li>
+
+            <li class="hidden" th:class="${session.finance}"><a href="/financeManagement">FinanceManagement</a></li>
+
+        </ul>
+
+    </div>
+    <div class="maincontent">
+
+        <form th:action="@{/editTaskRequest}" method = "POST">
+            <p>Task id: <input th:value="${task.id}" class="disabled" name="taskId" type="text"></p>
+            <p>Task status: <input th:value="${task.status}" class="disabled" name="status" type="text"></p>
+            <p>Event id: <input th:value="${task.eventId}" class="disabled" name="eventId" type="text" placeholder="event id"></p>
+            <p>Department: <input th:value="${task.department}" class="disabled" type="text"></p>
+            <p>Budget(SEK): <input th:value="${task.budget}" class="disabled" type="number"></p>
+            <p>Receiver employee:
+                <input th:value="${task.employeeName}" class="disabled" type="text" placeholder="null">
+            </p>
+            <p>Subject: <input th:value="${task.subject}" class="disabled" name="subject" type="text" ></p>
+            <p>Description: <input th:value="${task.description}" class="disabled" name="description" type="text" ></p>
+            <p>Priority:
+                <input th:value="${task.priority}" class="disabled" type="text" >
+            </p>
+
+            <div id="commentDiv">
+                <label>Comment for task</label>
+                <textarea rows="10" cols="30" class="hidden" th:class="${commentView}" name="comment" id="comment" th:field="*{task.comment}"></textarea>
+                <br>
+
+                <label>Plan for task</label>
+                <textarea rows="10" cols="30" class="hidden" th:class="${commentView}" name="plan" id="plan" th:field="*{task.plan}"></textarea>
+                <br>
+            </div>
+
+            <button type="submit">Confirm</button>
+
+        </form>
+
+
+
+    </div>
+</div>
+
+<footer>
+    <p>SEP system developed by Rui Shi&Xujing Song</p>
+  </footer>
+</body>
+
+</html>

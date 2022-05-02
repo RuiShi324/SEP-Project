@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SEP system</title>
+
+    <link rel="stylesheet" href="../css/preset.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+
+        .hidden{
+            display:none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div id="headercontent">
+        <div id="logout">
+          <a id="logoutbutton" href="/logout">Logout</a>
+        </div>
+        <div id = "header">
+           <p th:text="${session.userName}"></p>
+          <p th:text="${session.role}"></p>
+        </div>
+      </div>
+      </header>
+    <script>
+
+
+
+    </script>
+
+    <div class="content">
+        <div class="sidebar">
+            <ul class="side-menu">
+        
+                <li class="hidden" th:class="${session.event}"><a th:href="@{/eventManagement}">EventManagement</a></li>
+        
+                <li class="hidden" th:class="${session.task}"><a href="/taskManagement">TaskManagement</a></li>
+        
+                <li class="hidden" th:class="${session.staff}"><a href="/employeeManagement">EmployeeManagement</a></li>
+        
+                <li class="hidden" th:class="${session.finance}"><a href="/financeManagement">FinanceManagement</a></li>
+        
+              </ul>
+
+        </div>
+<!--        <div class="sidebar">
+            <ul class="side-menu">
+
+                <li class="hidden" th:if="${session.userId} eq 001 ">
+                    <a href="/eventManagement">EventManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 002 ">
+                    <a href="/eventManagement">EventManagement</a>
+                </li>
+                <li class="hidden" th:if="${session.userId} eq 003 ">
+                    <a href="/eventManagement">EventManagement</a>
+                    <a href="/financialManagement">FinancialManagement</a>
+                    <a href="/employeeManagement">EmployeeManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 004 ">
+                    <a href="/eventManagement">EventManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 005 ">
+                    <a href="/serTaskManagement">ServiceTaskManagement</a>
+                    <a href="/financialManagement">FinancialManagement</a>
+                    <a href="/employeeManagement">EmployeeManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 006 ">
+                    <a href="/proTaskManagement">ProductionTaskManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 007 ">
+                    <a href="/serTaskManagement">ServiceTaskManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 010 ">
+                    <a href="/proTaskManagement">ProductionTaskManagement</a>
+                </li>
+
+                <li class="hidden" th:if="${session.userId} eq 011 ">
+                    <a href="/employeeManagement">EmployeeManagement</a>
+                </li>
+
+            </ul>
+
+        </div>-->
+        <div class="maincontent">
+            <!-- <div style="width:800px;height:100px;overflow-y:scroll;overflow-x:none;background-color: rgba(0,0,0,0.1);"> -->
+                <table cellpadding="0" cellspacing="0">
+
+
+                    <caption id="tablecaption"><a href="/createEvent" th:class="${createView}" id="createButton" >create</a>Event List </caption>
+
+                    <thead>
+                        <tr>
+                            <th>Event ID</th>
+                            <th>Event Type</th>
+                            <th>Expected Budget(SEK)</th>
+                            <th>Event Status</th>
+                            <th>Event Details</th>
+                        </tr>
+                    </thead>
+         
+                    <tr th:each="event : ${eventlist}">
+                        <td th:text="${event.id}" name="">null</td>
+                        <td th:text="${event.eventType}">null</td>
+                        <td th:text="${event.expectedBudget}">null</td>
+                        <td th:text="${event.status}">null</td>
+
+
+                        <td>
+                            <form th:action="@{/editEvent}" method="post">
+                                <input name="eventId" type="hidden" th:value="${event.id}">
+                                <button type="submit">More</button>
+                            </form>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+         
+
+                </table>
+        
+              <!-- </div> -->
+        </div>
+    </div>
+    <footer>
+        <p>SEP system developed by Rui, Shi& Xujing, Song</p>
+      </footer>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SEP system</title>
+
+  <link rel="stylesheet" href="../css/preset.css">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+  </script>
+  <style>
+
+    .disabled{
+      color: rgb(84, 84, 84);
+      cursor: default;
+      background-color: rgb(235, 235, 228);
+      pointer-events:none;
+    }
+
+    .hidden{
+      display: none;
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <div id="headercontent">
+    <div id="logout">
+      <a id="logoutbutton" href="/logout">Logout</a>
+    </div>
+    <div id = "header">
+       <p th:text="${session.userName}"></p>
+      <p th:text="${session.role}"></p>
+    </div>
+  </div>
+  </header>
+  <script>
+
+
+
+  </script>
+
+  <div class="content">
+    <div class="sidebar">
+      <ul class="side-menu">
+        
+        <li class="hidden" th:class="${session.event}"><a href="/eventManagement">EventManagement</a></li>
+
+        <li class="hidden" th:class="${session.task}"><a href="/taskManagement">TaskManagement</a></li>
+
+        <li class="hidden" th:class="${session.staff}"><a href="/employeeManagement">EmployeeManagement</a></li>
+
+        <li class="hidden" th:class="${session.finance}"><a href="/financeManagement">FinanceManagement</a></li>
+
+      </ul>
+
+    </div>
+
+    <div class="maincontent">
+      <form th:action="@{/editEventRequest}" method = "POST">
+        <p>Event Id: <input name="eventId" type="text" class="disabled" th:value="${event.id}"></p>
+        <p>Client Name: <input name="clientName" class="disabled" type="text" placeholder="client name" th:value="${event.clientName}"></p>
+        <p>Event type: <input name="eventType" type="text" class="disabled" placeholder="event type" th:value="${event.eventType}"></p>
+        <p>Begin Date: <input name="beginDate" type="date" class="disabled" th:value="${event.beginDate}"></p>
+        <p>End Date: <input name="endDate" type="date" class="disabled" th:value="${event.endDate}"></p>
+        <p>Preferences: <input name="preferences" class="disabled" type="text" th:value="${event.preferences}"></p>
+        <div id="commentDiv">
+          <label>Description </label>
+          <textarea rows="10" cols="30" name="description" class="disabled" id="description" th:field="*{event.description}"></textarea>
+          <br>
+        </div>
+
+        <p>Status: <input name="status" class="disabled" type="text" placeholder="draft" th:value="${event.status}"></p>
+        <p>Expected budget(SEK): <input name="expectedBudget" class="disabled" type="number" placeholder="budget" th:value="${event.expectedBudget}"></p>
+
+        <p>Comment: <input name="comment" class="disabled" th:class="${session.budgetCommentView}" type="text" placeholder="comment" th:value="${event.comment}"></p>
+
+        <div class="disabled" th:class="${session.choiceView}">
+          <p>Please approve or reject:</p>
+          <input type="radio" id="approve" name="choice" checked=false value="approve">
+          <label for="approve">approve</label>
+          <input type="radio" id="reject" name="choice" value="reject">
+          <!--        if the role equals to financial manager, then replace the disabled with undisabled-->
+          <label for="reject">reject</label><br><br>
+        </div>
+
+
+        <button type="submit">submit</button>
+
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>SEP system developed by Rui Shi&Xujing Song</p>
+  </footer>
+</body>
+
+</html>

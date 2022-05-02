@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SEP system</title>
+
+    <link rel="stylesheet" href="../css/preset.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        /* #tablecaption{
+            text
+        } */
+
+        .hidden{
+            display:none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div id="headercontent">
+        <div id="logout">
+          <a id="logoutbutton" href="/logout">Logout</a>
+        </div>
+        <div id = "header">
+           <p th:text="${session.userName}"></p>
+          <p th:text="${session.role}"></p>
+        </div>
+      </div>
+      </header>
+    <script>
+
+
+
+    </script>
+
+    <div class="content">
+        <div class="sidebar">
+            <ul class="side-menu">
+        
+                <li class="hidden" th:class="${session.event}"><a href="/eventManagement">EventManagement</a></li>
+        
+                <li class="hidden" th:class="${session.task}"><a href="/taskManagement">TaskManagement</a></li>
+        
+                <li class="hidden" th:class="${session.staff}"><a href="/employeeManagement">EmployeeManagement</a></li>
+        
+                <li class="hidden" th:class="${session.finance}"><a href="/financeManagement">FinanceManagement</a></li>
+        
+              </ul>
+
+        </div>
+        <div class="maincontent">
+            <!-- <div style="width:800px;height:100px;overflow-y:scroll;overflow-x:none;background-color: rgba(0,0,0,0.1);"> -->
+                <table cellpadding="0" cellspacing="0">
+
+
+                    <caption id="tablecaption"><a href="/createTask" th:class="${session.createTaskEnable}">create</a>Task List </caption>
+                
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Event ID</th>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Priority</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+         
+                    <tr th:each="task : ${tasklist}">
+                        <td th:text="${task.id}" name="">null</td>
+                        <td th:text="${task.eventId}">null</td>
+                        <td th:text="${task.employeeName}">null</td>
+                        <td th:text="${task.department}">null</td>
+                        <td th:text="${task.priority}">null</td>
+                        <td th:text="${task.subject}">null</td>
+                        <td th:text="${task.status}">null</td>
+                        <td>
+                            <form th:action="@{/editTask}" method="post">
+                                <input name="taskId" type="hidden" th:value="${task.id}">
+                                <button type="submit">More</button>
+                            </form>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+         
+
+                </table>
+        
+              <!-- </div> -->
+        </div>
+    </div>
+
+    <footer>
+        <p>SEP system developed by Rui Shi&Xujing Song</p>
+      </footer>
+</body>
+
+</html>

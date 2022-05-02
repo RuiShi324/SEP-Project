@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SEP system</title>
+
+    <link rel="stylesheet" href="../css/preset.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <style>
+        .hidden{
+            display:none;
+        }
+            .disabled{
+      color: rgb(84, 84, 84);
+      cursor: default;
+      background-color: rgb(235, 235, 228);
+      pointer-events:none;
+    }
+    .textArea{
+            vertical-align: middle;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div id="headercontent">
+        <div id="logout">
+          <a id="logoutbutton" href="/logout">Logout</a>
+        </div>
+        <div id = "header">
+           <p th:text="${session.userName}"></p>
+          <p th:text="${session.role}"></p>
+        </div>
+      </div>
+      </header>
+<script>
+
+
+
+</script>
+
+<div class="content">
+    <div class="sidebar">
+        <ul class="side-menu">
+
+            <li class="hidden" th:class="${session.event}"><a href="/eventManagement">EventManagement</a></li>
+
+            <li class="hidden" th:class="${session.task}"><a href="/taskManagement">TaskManagement</a></li>
+
+            <li class="hidden" th:class="${session.staff}"><a href="/employeeManagement">EmployeeManagement</a></li>
+
+            <li class="hidden" th:class="${session.finance}"><a href="/financeManagement">FinanceManagement</a></li>
+
+        </ul>
+
+    </div>
+    <div class="maincontent">
+
+        <form th:action="@{/createRecruitmentRequest}" method = "POST">
+            <p>
+                Contract type:
+                <input type="radio" id="fulltime" name="contractType" checked value="fulltime">
+                <label for="fulltime">Full time</label>
+                <input type="radio" id="parttime" name="contractType" value="parttime">
+                <label for="parttime">Part time</label><br><br>
+            </p>
+
+            <p>Requesting department: <input class="disabled" name="requestingDept" th:value="${department}" type="text"></p>
+
+            <p>Years of Experience: <input name="yearOfExperience" type="text" ></p>
+            <p>Job of Title: <input name="jobTitle" type="text" ></p>
+            <div id="description">
+                <label class=".textArea">Job Description</label>
+                <textarea rows="10" cols="30" name="description" class = ".textArea"></textarea>
+                <br>
+            </div>
+
+
+            <button type="submit">submit</button>
+
+        </form>
+
+
+
+    </div>
+</div>
+
+<footer>
+    <p>SEP system developed by Rui Shi&Xujing Song</p>
+  </footer>
+</body>
+
+</html>

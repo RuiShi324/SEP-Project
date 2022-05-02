@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SEP system</title>
+
+  <link rel="stylesheet" href="../css/preset.css">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+  </script>
+  <style>
+
+
+      .hidden{
+          display:none;
+      }
+
+
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <div id="headercontent">
+    <div id="logout">
+      <a id="logoutbutton" href="/logout">Logout</a>
+    </div>
+    <div id = "header">
+       <p th:text="${session.userName}"></p>
+      <p th:text="${session.role}"></p>
+    </div>
+  </div>
+  </header>
+  <script>
+
+
+
+  </script>
+
+  <div class="content">
+    <div class="sidebar">
+      <ul class="side-menu">
+        
+        <li class="hidden" th:class="${session.event}"><a href="/eventManagement">EventManagement</a></li>
+
+        <li class="hidden" th:class="${session.task}"><a href="/taskManagement">TaskManagement</a></li>
+
+        <li class="hidden" th:class="${session.staff}"><a href="/employeeManagement">EmployeeManagement</a></li>
+
+        <li class="hidden" th:class="${session.finance}"><a href="/financeManagement">FinanceManagement</a></li>
+
+      </ul>
+
+    </div>
+    <div class="maincontent">
+     
+        <form th:action="@{/createTaskRequest}" method = "POST">
+            
+            <p>Event id: <input name="eventId" type="text" placeholder="event id"></p>
+            <p>Receiver employee name:
+
+              <select name = "employeeId">
+                <option th:each="employee : ${employeelist}" th:value = "${employee.id}" th:text="${employee.name}">null</option>
+              </select>
+
+              <!-- <input name="employeeId" type="text" placeholder="employee id"> -->
+            </p>
+            <p>Subject: <input name="subject" type="text" ></p>
+            <p>Description: <input name="description" type="text" ></p>
+            <p>Budget(SEK): <input name="budget" type="number" ></p>
+            <p>Priority: 
+              <select name = "priority">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+              </select>
+            </p>
+           
+            <button type="submit">submit</button>
+        
+            </form> 
+
+
+
+    </div>
+  </div>
+  <footer>
+    <p>SEP system developed by Rui Shi&Xujing Song</p>
+  </footer>
+</body>
+
+</html>
